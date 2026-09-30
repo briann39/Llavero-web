@@ -41,6 +41,7 @@
         <a href="#seguridad">Seguridad</a>
         <a href="#app">La app</a>
         <a href="#funciones">Funciones</a>
+        <a href="#codigo-abierto">Código abierto</a>
         <a href="#descargar">Descargar</a>
       </nav>
       <a class="btn" href="https://github.com/briann39/Llavero">Código en GitHub</a>
@@ -59,7 +60,10 @@
             <a class="btn btn-fuerte btn-grande" href="#descargar">Descargar para Windows</a>
             <a class="btn btn-grande" href="#seguridad">Cómo las protege</a>
           </div>
-          <p class="nota">Gratis y de código abierto (MIT).</p>
+          <p class="nota">
+            Gratis y de código abierto (MIT). ¿Prefieres no instalar nada?
+            <a href="https://llaveroappuy.vercel.app">Úsalo en el navegador</a>.
+          </p>
         </div>
 
         <div class="placa" id="placa">
@@ -308,6 +312,62 @@
         </div>
       </section>
 
+      <!-- ================= Código abierto ================= -->
+      <section class="seccion" id="codigo-abierto">
+        <div class="contenedor abierto">
+          <div>
+            <h2>El código es público, para que lo veas con tus propios ojos</h2>
+            <p class="intro">
+              Llavero se publica en GitHub con licencia MIT. Puedes leer cada línea de lo que hace con tus contraseñas,
+              en lugar de fiarte de una promesa.
+            </p>
+
+            <ul class="libertades">
+              <li>
+                <b>Léelo y audítalo</b>
+                <span>El cifrado, el guardado y las copias de seguridad están en archivos que puedes leer. Las pruebas automáticas cubren el cifrado, los respaldos y los códigos 2FA.</span>
+              </li>
+              <li>
+                <b>Úsalo y cámbialo</b>
+                <span>La licencia MIT permite usarlo, copiarlo, modificarlo y compartirlo, también dentro de tus propios proyectos.</span>
+              </li>
+              <li>
+                <b>Compílalo tú mismo</b>
+                <span>Puedes generar la aplicación desde el código en lugar de fiarte del instalador que descargas.</span>
+              </li>
+              <li>
+                <b>Mejóralo</b>
+                <span>Si encuentras un fallo, abre un issue. Si quieres arreglarlo, propón el cambio con una pull request.</span>
+              </li>
+            </ul>
+
+            <p class="matiz">
+              Código abierto no significa auditado: ninguna persona externa lo ha revisado todavía. Por eso conviene que
+              lo mires.
+            </p>
+
+            <div class="acciones">
+              <a class="btn btn-fuerte" href="https://github.com/briann39/Llavero">Ver el código en GitHub</a>
+              <a class="btn" href="https://github.com/briann39/Llavero/issues">Reportar un problema</a>
+            </div>
+          </div>
+
+          <figure class="codigo-fig">
+            <pre class="codigo" tabindex="0" aria-label="Comandos para descargar, probar y ejecutar Llavero desde el código"><code><span class="c"># Descarga el código</span>
+git clone https://github.com/briann39/Llavero.git
+cd Llavero
+
+<span class="c"># Instala las dependencias y comprueba que todo funciona</span>
+npm install
+npm test
+
+<span class="c"># Ábrelo en tu navegador</span>
+npm run dev</code></pre>
+            <figcaption>Necesitas tener Node.js y Git instalados.</figcaption>
+          </figure>
+        </div>
+      </section>
+
       <!-- ================= Conviene saber ================= -->
       <section class="seccion">
         <div class="contenedor franco">
@@ -322,12 +382,12 @@
               <span>El código es público precisamente para que cualquiera pueda revisarlo. Revísalo antes de confiarle datos importantes.</span>
             </li>
             <li>
-              <b>Por ahora es solo para Windows 10 y 11.</b>
+              <b>La aplicación de escritorio es solo para Windows 10 y 11.</b>
               <span>El instalador no está firmado, así que Windows mostrará un aviso de SmartScreen la primera vez: «Más información» y luego «Ejecutar de todas formas».</span>
             </li>
             <li>
-              <b>Tus datos viven en tu equipo.</b>
-              <span>Si lo pierdes o reinstalas Windows sin una copia de seguridad, se pierden con él. Activa las copias automáticas.</span>
+              <b>Tus datos viven en tu equipo, o en tu navegador si usas la versión web.</b>
+              <span>Si pierdes el equipo, reinstalas Windows o borras los datos del navegador sin una copia de seguridad, se pierden con él. Descarga copias cifradas y guárdalas fuera.</span>
             </li>
           </ul>
         </div>
@@ -347,8 +407,12 @@
             <div class="acciones">
               <a class="btn btn-fuerte btn-grande" href="https://github.com/briann39/Llavero/releases/latest">Descargar el instalador</a>
               <a class="btn btn-grande" href="https://github.com/briann39/Llavero/releases/latest">Descargar la versión portable</a>
+              <a class="btn btn-grande" href="https://llaveroappuy.vercel.app">Usar en el navegador</a>
             </div>
-            <small>Se descarga desde GitHub Releases. Compara el archivo con el código publicado en el repositorio si quieres comprobarlo.</small>
+            <small>
+              Las descargas salen de GitHub Releases. La versión web funciona en cualquier navegador y guarda tus datos
+              cifrados en ese navegador, sin instalar nada.
+            </small>
           </div>
         </div>
       </section>
@@ -375,7 +439,12 @@
             </details>
             <details>
               <summary>¿Funciona en Mac, Linux o el móvil?</summary>
-              <p>Por ahora solo en Windows. No hay aplicación para móvil ni extensión de navegador.</p>
+              <p>
+                La aplicación de escritorio es solo para Windows. En otros sistemas puedes usar la
+                <a href="https://llaveroappuy.vercel.app">versión web</a>, que funciona en cualquier navegador. Sus datos
+                se guardan en ese navegador y no se sincronizan solos con los de otro equipo: para moverlos, usa una copia
+                de seguridad cifrada. No hay aplicación para móvil ni extensión de navegador.
+              </p>
             </details>
             <details>
               <summary>¿Cómo sé que es seguro?</summary>
@@ -398,6 +467,7 @@
         </a>
         <span>Licencia MIT, 2026, briann39</span>
         <span class="enlaces">
+          <a href="https://llaveroappuy.vercel.app">Versión web</a>
           <a href="https://github.com/briann39/Llavero">Código en GitHub</a>
           <a href="https://github.com/briann39/Llavero/releases">Versiones</a>
           <a href="https://github.com/briann39/Llavero/issues">Reportar un problema</a>
