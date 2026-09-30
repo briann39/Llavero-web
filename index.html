@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Llavero: gestor de contraseñas cifrado para Windows</title>
+    <meta
+      name="description"
+      content="Llavero guarda tus contraseñas cifradas en tu propio equipo. Sin cuenta, sin servidor, con 2FA, auditoría de seguridad y código abierto (MIT)."
+    />
+    <meta name="theme-color" content="#1b222b" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preload" href="fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="css/estilos.css" />
+  </head>
+  <body>
+    <!-- Símbolos reutilizados -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="capucha" viewBox="0 0 14 20">
+        <path fill="currentColor" fill-rule="evenodd" d="M1.5 20V7.5a5.5 5.5 0 0 1 11 0V20zM7 5.4a1.9 1.9 0 1 0 0 3.8a1.9 1.9 0 1 0 0-3.8z" />
+      </symbol>
+      <symbol id="flecha" viewBox="0 0 24 24">
+        <path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M4 12h15m-6-6 6 6-6 6" />
+      </symbol>
+      <symbol id="marca" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <circle cx="7.5" cy="12" r="4.5" />
+          <path d="M12 12h9.5M17 12v3.2M20 12v2.2" />
+        </g>
+      </symbol>
+    </svg>
+
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+    <header class="contenedor cabecera">
+      <a class="marca" href="#" aria-label="Llavero, inicio">
+        <svg style="color: var(--acento)" aria-hidden="true"><use href="#marca" /></svg>
+        Llavero
+      </a>
+      <nav aria-label="Principal">
+        <a href="#seguridad">Seguridad</a>
+        <a href="#app">La app</a>
+        <a href="#funciones">Funciones</a>
+        <a href="#descargar">Descargar</a>
+      </nav>
+      <a class="btn" href="https://github.com/briann39/Llavero">Código en GitHub</a>
+    </header>
+
+    <main id="contenido">
+      <!-- ================= Inicio ================= -->
+      <section class="contenedor inicio">
+        <div>
+          <h1>Tus contraseñas, bajo llave.</h1>
+          <p class="entradilla">
+            Llavero es un gestor de contraseñas para Windows que lo cifra todo en tu propio equipo. Sin cuenta, sin
+            servidor y con el código a la vista.
+          </p>
+          <div class="acciones">
+            <a class="btn btn-fuerte btn-grande" href="#descargar">Descargar para Windows</a>
+            <a class="btn btn-grande" href="#seguridad">Cómo las protege</a>
+          </div>
+          <p class="nota">Gratis y de código abierto (MIT).</p>
+        </div>
+
+        <div class="placa" id="placa">
+          <svg viewBox="0 -45 380 195" role="img" aria-label="Una llave cuyos dientes se tallan a medida que escribes">
+            <defs>
+              <mask id="hoja">
+                <path d="M96 58 H336 L356 75 L336 92 H96 Z" fill="#fff" />
+                <rect class="diente" x="124" y="92" width="15" height="0" fill="#000" />
+                <rect class="diente" x="147" y="92" width="15" height="0" fill="#000" />
+                <rect class="diente" x="170" y="92" width="15" height="0" fill="#000" />
+                <rect class="diente" x="193" y="92" width="15" height="0" fill="#000" />
+                <rect class="diente" x="216" y="92" width="15" height="0" fill="#000" />
+                <rect class="diente" x="239" y="92" width="15" height="0" fill="#000" />
+                <rect class="diente" x="262" y="92" width="15" height="0" fill="#000" />
+                <rect class="diente" x="285" y="92" width="15" height="0" fill="#000" />
+                <rect class="diente" x="308" y="92" width="15" height="0" fill="#000" />
+              </mask>
+            </defs>
+            <circle cx="62" cy="75" r="62" fill="rgb(255 255 255 / 0.03)" stroke="rgb(255 255 255 / 0.14)" stroke-width="1.5" />
+            <circle cx="62" cy="75" r="52" fill="none" stroke="rgb(255 255 255 / 0.07)" />
+            <g class="llave-gira">
+              <path
+                fill="#d6a03a"
+                fill-rule="evenodd"
+                d="M62 33a42 42 0 1 0 0 84a42 42 0 1 0 0-84zm0 28a14 14 0 1 1 0 28a14 14 0 1 1 0-28z"
+              />
+              <rect x="96" y="58" width="270" height="34" fill="#d6a03a" mask="url(#hoja)" />
+              <path d="M104 66 H330" stroke="rgb(0 0 0 / 0.22)" stroke-width="1.5" mask="url(#hoja)" />
+            </g>
+          </svg>
+
+          <label for="prueba">Prueba la llave: escribe lo que quieras</label>
+          <div class="fila">
+            <input id="prueba" type="text" autocomplete="off" spellcheck="false" placeholder="Una frase cualquiera" />
+            <button class="btn" type="button" id="girar">Girar la llave</button>
+          </div>
+          <p class="aviso">Es solo una demostración. Lo que escribas no se envía ni se guarda en ningún sitio.</p>
+        </div>
+      </section>
+
+      <!-- ================= Seguridad ================= -->
+      <section class="seccion" id="seguridad">
+        <div class="contenedor">
+          <h2>Solo sale de tu equipo lo que ya está cifrado</h2>
+          <p class="intro">
+            Llavero usa las funciones criptográficas estándar del sistema, sin inventar nada propio. Tu contraseña
+            maestra es la única llave, y no se guarda en ninguna parte.
+          </p>
+
+          <div class="proceso">
+            <div class="en-equipo">
+              <span class="rotulo">Sucede dentro de tu equipo</span>
+              <div class="paso">
+                <h3>Tu contraseña maestra</h3>
+                <p>La escribes al abrir Llavero. No se guarda ni se envía a ningún sitio.</p>
+              </div>
+              <svg class="flecha" aria-hidden="true"><use href="#flecha" /></svg>
+              <div class="paso">
+                <h3>Se convierte en una clave</h3>
+                <p>
+                  <code>PBKDF2</code> con 600.000 vueltas y una sal aleatoria. Probar contraseñas a la fuerza sale
+                  muy caro.
+                </p>
+              </div>
+              <svg class="flecha" aria-hidden="true"><use href="#flecha" /></svg>
+              <div class="paso">
+                <h3>Cada entrada se cifra</h3>
+                <p>
+                  <code>AES-256-GCM</code> con un valor nuevo por entrada. Si alguien altera los datos, no se abren.
+                </p>
+              </div>
+            </div>
+            <svg class="flecha" aria-hidden="true"><use href="#flecha" /></svg>
+            <div class="paso salida">
+              <h3>Solo sale lo cifrado</h3>
+              <p>A tu disco, a una copia de seguridad o a la nube si la activas. Sin tu contraseña, es ilegible.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= La app ================= -->
+      <section class="seccion" id="app">
+        <div class="contenedor">
+          <h2>Una lista que se lee de un vistazo</h2>
+          <p class="intro">
+            Cada categoría lleva su capucha de color, como las llaves de un manojo. Pasa el ratón por una fila para
+            copiar la contraseña sin abrir nada, y mira el código 2FA sin salir de la lista.
+          </p>
+
+          <figure class="figura">
+            <div
+              class="ventana"
+              role="img"
+              aria-label="Ventana de Llavero con una lista de seis cuentas de ejemplo, filtros por categoría y el detalle de una cuenta bancaria con su código 2FA"
+            >
+              <div class="titulo-ventana">
+                <svg style="color: var(--acento)" aria-hidden="true"><use href="#marca" /></svg>
+                Llavero
+                <span class="controles" aria-hidden="true">— ▢ ✕</span>
+              </div>
+
+              <div class="app" aria-hidden="true">
+                <div class="m-barra">
+                  <span class="m-marca">
+                    <svg style="color: var(--acento)"><use href="#marca" /></svg>
+                    Llavero
+                  </span>
+                  <span class="m-buscar">Buscar por nombre, usuario o etiqueta <kbd>Ctrl K</kbd></span>
+                  <span class="m-boton">Nueva entrada</span>
+                </div>
+
+                <div class="m-chips">
+                  <span class="m-chip activa">Todas <small>6</small></span>
+                  <span class="m-chip"><svg class="capucha" style="color: var(--llave-3)"><use href="#capucha" /></svg>Personal <small>2</small></span>
+                  <span class="m-chip"><svg class="capucha" style="color: var(--llave-0)"><use href="#capucha" /></svg>Bancos <small>1</small></span>
+                  <span class="m-chip"><svg class="capucha" style="color: var(--llave-4)"><use href="#capucha" /></svg>Trabajo <small>1</small></span>
+                  <span class="m-chip"><svg class="capucha" style="color: var(--llave-1)"><use href="#capucha" /></svg>Compras <small>1</small></span>
+                  <span class="m-chip"><svg class="capucha" style="color: var(--llave-5)"><use href="#capucha" /></svg>Ocio <small>1</small></span>
+                </div>
+
+                <div class="m-fila">
+                  <span class="m-icono">B</span>
+                  <span class="m-nombre"><b>banco-ejemplo.com</b><span>ana@ejemplo.com</span></span>
+                  <span class="m-cat"><svg class="capucha" style="color: var(--llave-0)"><use href="#capucha" /></svg>Bancos</span>
+                  <span class="m-codigo"><b>482 913</b><i></i></span>
+                </div>
+                <div class="m-fila elegida">
+                  <span class="m-icono">C</span>
+                  <span class="m-nombre"><b>correo-ejemplo.com</b><span>ana@ejemplo.com</span></span>
+                  <span class="m-cat"><svg class="capucha" style="color: var(--llave-3)"><use href="#capucha" /></svg>Personal</span>
+                  <span class="m-codigo"></span>
+                </div>
+                <div class="m-fila">
+                  <span class="m-icono">T</span>
+                  <span class="m-nombre"><b>tienda-ejemplo.com</b><span>ana@ejemplo.com</span></span>
+                  <span class="m-cat"><svg class="capucha" style="color: var(--llave-1)"><use href="#capucha" /></svg>Compras</span>
+                  <span class="m-codigo"></span>
+                </div>
+                <div class="m-fila">
+                  <span class="m-icono">E</span>
+                  <span class="m-nombre"><b>empresa-ejemplo.com</b><span>ana@empresa.com</span></span>
+                  <span class="m-cat"><svg class="capucha" style="color: var(--llave-4)"><use href="#capucha" /></svg>Trabajo</span>
+                  <span class="m-codigo"><b>071 356</b><i></i></span>
+                </div>
+                <div class="m-fila">
+                  <span class="m-icono">S</span>
+                  <span class="m-nombre"><b>series-ejemplo.com</b><span>ana@ejemplo.com</span></span>
+                  <span class="m-cat"><svg class="capucha" style="color: var(--llave-5)"><use href="#capucha" /></svg>Ocio</span>
+                  <span class="m-codigo"></span>
+                </div>
+                <div class="m-fila">
+                  <span class="m-icono">C</span>
+                  <span class="m-nombre"><b>Casa</b><span>WiFi</span></span>
+                  <span class="m-cat"><svg class="capucha" style="color: var(--llave-3)"><use href="#capucha" /></svg>Personal</span>
+                  <span class="m-codigo"></span>
+                </div>
+
+                <div class="m-velo"></div>
+                <div class="m-hoja">
+                  <h3>banco-ejemplo.com</h3>
+                  <p class="sub">Cuenta · Bancos</p>
+                  <dl style="margin: 0">
+                    <div class="m-dato"><dt>Usuario o correo</dt><dd>ana@ejemplo.com</dd></div>
+                    <div class="m-dato">
+                      <dt>Contraseña</dt>
+                      <dd class="m-clave">Tz<span class="d">7</span><span class="s">!</span>mQ<span class="d">4</span><span class="s">-</span>rLp<span class="d">2</span><span class="s">#</span>Vx<span class="d">9</span></dd>
+                    </div>
+                    <div class="m-dato">
+                      <dt>Código de verificación (2FA)</dt>
+                      <dd class="m-2fa">482 913</dd>
+                    </div>
+                  </dl>
+                </div>
+              </div>
+            </div>
+            <figcaption>Ejemplo con datos ficticios. En la contraseña, los dígitos y los símbolos se resaltan para leerla y dictarla sin errores.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ================= Funciones ================= -->
+      <section class="seccion" id="funciones">
+        <div class="contenedor">
+          <h2>Lo que hace, agrupado por lo que necesitas</h2>
+
+          <div class="grupos">
+            <section class="grupo">
+              <h3><svg class="capucha" style="color: var(--llave-3)" aria-hidden="true"><use href="#capucha" /></svg>Guardar más que contraseñas</h3>
+              <dl>
+                <dt>Seis tipos de entrada</dt>
+                <dd>Cuentas, tarjetas, notas seguras, claves API, licencias y redes WiFi, con su código QR.</dd>
+                <dt>Orden a tu manera</dt>
+                <dd>Categorías con capucha de color, etiquetas, favoritos y búsqueda instantánea.</dd>
+                <dt>Adjuntos cifrados</dt>
+                <dd>Hasta cinco archivos por entrada, de 2 MB cada uno, cifrados igual que lo demás.</dd>
+                <dt>Códigos de recuperación</dt>
+                <dd>Guarda los códigos de emergencia del 2FA junto a la cuenta a la que pertenecen.</dd>
+              </dl>
+            </section>
+
+            <section class="grupo">
+              <h3><svg class="capucha" style="color: var(--llave-0)" aria-hidden="true"><use href="#capucha" /></svg>Protegerlas</h3>
+              <dl>
+                <dt>Códigos 2FA integrados</dt>
+                <dd>Genera los códigos de un solo uso (TOTP) y los muestra en la lista, con cuenta atrás.</dd>
+                <dt>Auditoría de seguridad</dt>
+                <dd>Detecta contraseñas repetidas, débiles, antiguas o filtradas. La comprobación de filtraciones usa Have I Been Pwned y solo envía 5 caracteres del hash, nunca la contraseña.</dd>
+                <dt>Bloqueo automático</dt>
+                <dd>Se cierra tras 5 minutos sin actividad, y el portapapeles se borra a los 20 segundos de copiar.</dd>
+                <dt>Clave secreta opcional</dt>
+                <dd>Una segunda clave que no sale de tus equipos, con su Kit de emergencia. Robar la base de datos no basta para atacarte.</dd>
+              </dl>
+            </section>
+
+            <section class="grupo">
+              <h3><svg class="capucha" style="color: var(--llave-4)" aria-hidden="true"><use href="#capucha" /></svg>Usarlo cada día</h3>
+              <dl>
+                <dt>Generador de contraseñas y frases</dt>
+                <dd>Contraseñas aleatorias a tu medida, o frases de varias palabras fáciles de recordar.</dd>
+                <dt>Teclado primero</dt>
+                <dd>Ctrl K abre una paleta para buscar y actuar sin ratón. Ctrl Alt L abre la búsqueda rápida desde cualquier aplicación.</dd>
+                <dt>Siempre a mano</dt>
+                <dd>Vive en la bandeja del sistema y puede arrancar con Windows, ya minimizado.</dd>
+                <dt>Sin perder nada por error</dt>
+                <dd>Historial de contraseñas anteriores, papelera de 30 días y avisos de caducidad para rotarlas a tiempo.</dd>
+                <dt>Claro u oscuro</dt>
+                <dd>Sigue el tema de Windows o el que elijas. Puedes traer tus datos desde un archivo CSV.</dd>
+              </dl>
+            </section>
+
+            <section class="grupo">
+              <h3><svg class="capucha" style="color: var(--llave-2)" aria-hidden="true"><use href="#capucha" /></svg>Copias y nube</h3>
+              <dl>
+                <dt>Copia en un archivo</dt>
+                <dd>Un respaldo cifrado que solo se abre con tu contraseña maestra.</dd>
+                <dt>Copias automáticas</dt>
+                <dd>Elige una carpeta (un disco externo, OneDrive…) y Llavero guarda copias cifradas cada cierto tiempo, conservando las últimas.</dd>
+                <dt>Nube opcional con Supabase</dt>
+                <dd>Sube solo datos ya cifrados. Cada cuenta ve únicamente lo suyo, gracias a las políticas de seguridad por fila.</dd>
+                <dt>Actualizaciones</dt>
+                <dd>La app avisa cuando hay una versión nueva en GitHub.</dd>
+              </dl>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= Conviene saber ================= -->
+      <section class="seccion">
+        <div class="contenedor franco">
+          <h2>Lo que conviene saber antes de usarlo</h2>
+          <ul>
+            <li>
+              <b>Si olvidas la contraseña maestra, no hay forma de recuperar tus datos.</b>
+              <span>Ni tú ni nadie. Guarda el Kit de emergencia en un lugar seguro.</span>
+            </li>
+            <li>
+              <b>No ha pasado una auditoría de seguridad externa.</b>
+              <span>El código es público precisamente para que cualquiera pueda revisarlo. Revísalo antes de confiarle datos importantes.</span>
+            </li>
+            <li>
+              <b>Por ahora es solo para Windows 10 y 11.</b>
+              <span>El instalador no está firmado, así que Windows mostrará un aviso de SmartScreen la primera vez: «Más información» y luego «Ejecutar de todas formas».</span>
+            </li>
+            <li>
+              <b>Tus datos viven en tu equipo.</b>
+              <span>Si lo pierdes o reinstalas Windows sin una copia de seguridad, se pierden con él. Activa las copias automáticas.</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ================= Descargar ================= -->
+      <section class="seccion" id="descargar">
+        <div class="contenedor">
+          <div class="descarga">
+            <div>
+              <h2>Llavero 1.0.0 para Windows</h2>
+              <p>
+                Elige el instalador o la versión portable, que no instala nada y se puede llevar en una memoria USB. Las
+                dos pesan unos 104 MB.
+              </p>
+            </div>
+            <div class="acciones">
+              <a class="btn btn-fuerte btn-grande" href="https://github.com/briann39/Llavero/releases/latest">Descargar el instalador</a>
+              <a class="btn btn-grande" href="https://github.com/briann39/Llavero/releases/latest">Descargar la versión portable</a>
+            </div>
+            <small>Se descarga desde GitHub Releases. Compara el archivo con el código publicado en el repositorio si quieres comprobarlo.</small>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= Preguntas ================= -->
+      <section class="seccion">
+        <div class="contenedor">
+          <h2>Preguntas frecuentes</h2>
+          <div class="preguntas">
+            <details>
+              <summary>¿Envía mis contraseñas a algún servidor?</summary>
+              <p>
+                No. Se cifran y se guardan en tu equipo. Llavero no tiene servidor propio. Solo si activas la nube
+                opcional se suben datos, y van ya cifrados con una clave que nunca sale de tu equipo.
+              </p>
+            </details>
+            <details>
+              <summary>¿Cuánto cuesta?</summary>
+              <p>Nada. Es gratuito y de código abierto bajo licencia MIT: puedes usarlo, copiarlo y modificarlo.</p>
+            </details>
+            <details>
+              <summary>¿Puedo traer mis contraseñas de otro gestor?</summary>
+              <p>Sí, desde un archivo CSV, que es el formato que exportan la mayoría de navegadores y gestores.</p>
+            </details>
+            <details>
+              <summary>¿Funciona en Mac, Linux o el móvil?</summary>
+              <p>Por ahora solo en Windows. No hay aplicación para móvil ni extensión de navegador.</p>
+            </details>
+            <details>
+              <summary>¿Cómo sé que es seguro?</summary>
+              <p>
+                El código está completo en GitHub y el cifrado usa las funciones estándar del navegador (Web Crypto), sin
+                librerías criptográficas propias. Aun así, no ha tenido una auditoría externa, así que la decisión de
+                confiar es tuya.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <div class="contenedor">
+        <a class="marca" href="#" aria-label="Llavero, inicio">
+          <svg style="color: var(--acento)" aria-hidden="true"><use href="#marca" /></svg>
+          Llavero
+        </a>
+        <span>Licencia MIT, 2026, briann39</span>
+        <span class="enlaces">
+          <a href="https://github.com/briann39/Llavero">Código en GitHub</a>
+          <a href="https://github.com/briann39/Llavero/releases">Versiones</a>
+          <a href="https://github.com/briann39/Llavero/issues">Reportar un problema</a>
+        </span>
+      </div>
+    </footer>
+
+    <script src="js/llave.js"></script>
+  </body>
+</html>
